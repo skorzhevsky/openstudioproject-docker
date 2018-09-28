@@ -1,0 +1,38 @@
+version: '3'
+services:
+  yoga-web:
+    image: yoga-web:v1
+    container_name: yw
+    restart: always
+    networks:
+      - yoga-net
+    depends_on:
+      - mysql
+      - redis
+    ports:
+      - "8443:8443"
+    volumes:
+      - /root/docker/openstudioproject-docker/data/web2py-R-2.17.1:/opt/web2py
+      - /etc/letsencrypt:/etc/letsencrypt:ro
+
+
+  redis:
+    image: redis
+    container_name: yr
+    restart: always
+    networks:
+      - yoga-net
+    volumes:
+      - "/root/docker/openstudioproject-docker/data/redis:/data"
+
+  mysql:
+    image: mysql:5.7
+    container_name: ym
+    restart: always
+    networks:
+      - yoga-net
+    volumes:
+      - "/root/docker/openstudioproject-docker/data/mysql:/var/lib/mysql"
+
+networks:
+  yoga-net:

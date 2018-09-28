@@ -1,0 +1,20 @@
+FROM python:2.7-slim-stretch
+
+RUN mkdir -p /opt/web2py
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential python-cffi libcairo2 libpango-1.0-0 \
+    libpangocairo-1.0-0 libgdk-pixbuf2.0-0 libffi-dev shared-mime-info  \
+    && rm -rf /var/lib/apt/lists/* \
+    && pip --no-cache-dir install openpyxl html2text pytz redis \
+       mollie-api-python weasyprint pybarcode qrcode pydal Image mailchimp3 \
+    && apt-get remove -y build-essential && apt-get autoremove -y
+
+
+WORKDIR /opt/web2py
+
+EXPOSE 8000/tcp
+
+
+CMD python2 web2py.py -a PWDopenstudio -i 0.0.0.0 -p 8000
+
