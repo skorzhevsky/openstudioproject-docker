@@ -1,5 +1,7 @@
 # How to run [OpenStudio](https://www.openstudioproject.com/) yoga software in the Docker.
 
+#WARNING: in my env works unstable, web2py just dies time to time.
+
  1. Install [Docker](https://docs.docker.com/install/linux/docker-ce/ubuntu/).
  2. Install Docker [Compose](https://docs.docker.com/compose/install/).
  3. Create directory structure (you can adjust):
